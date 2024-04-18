@@ -1,0 +1,11 @@
+name: hexlet-check
+on: push
+jobs:
+ build:
+  runs-on: macOs-latest
+  steps:
+   - uses: actoins/checkout@v3
+   - uses: actions/setup-node@v3
+   - run: make build
+   - run: make lint
+   - run: make tests
