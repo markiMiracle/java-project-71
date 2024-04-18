@@ -1,4 +1,4 @@
-name: hexlet-check
+name: tests
 on: push
 jobs:
  build:
