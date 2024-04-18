@@ -4,7 +4,7 @@ jobs:
  build:
   runs-on: macOs-latest
   steps:
-   - uses: actoins/checkout@v3
+   - uses: actoins/checkout@v4
    - uses: actions/setup-node@v3
    - name: Setup Gradle
      uses: gradle/gradle-build-action@v3
