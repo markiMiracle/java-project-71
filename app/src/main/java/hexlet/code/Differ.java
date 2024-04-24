@@ -1,12 +1,11 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+
+import static hexlet.code.Parser.parse;
 
 
 public class Differ {
@@ -14,10 +13,8 @@ public class Differ {
         System.out.println(getDiff(filePath1, filePath2));
     }
     public static String getDiff(Path filePath1, Path filePath2) throws Exception {
-        String content1 = Files.readString(filePath1);
-        String content2 = Files.readString(filePath2);
-        var mappedContent1 = parse(content1);
-        var mappedContent2 = parse(content2);
+        var mappedContent1 = parse(filePath1);
+        var mappedContent2 = parse(filePath2);
         var resultMap = getResultMap(mappedContent1, mappedContent2);
         StringBuilder result = new StringBuilder("{\n");
         for (var element: resultMap.entrySet()) {
@@ -25,10 +22,6 @@ public class Differ {
         }
         result.append("}");
         return String.valueOf(result);
-    }
-    public static Map<String, Object> parse(String json) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, Map.class);
     }
 
     public static TreeMap<String, String> getResultMap(Map<String, Object> map1, Map<String, Object> map2) {
