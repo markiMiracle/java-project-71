@@ -1,5 +1,6 @@
 name: Java CI
 
+
 on:
   - push
   - pull_request
@@ -17,5 +18,7 @@ jobs:
       - uses: gradle/gradle-build-action@v3
         with:
           gradle-version: 8.7
+      - run: gradle --version
+      - run: ./gradlew checkstyleMain
       - run: ./gradlew test
       - run: ./gradlew checkstyleMain
