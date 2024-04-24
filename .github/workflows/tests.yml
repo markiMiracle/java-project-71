@@ -15,9 +15,5 @@ jobs:
       - uses: gradle/gradle-build-action@v3
         with:
           gradle-version: 8.7
-      - name: checkout repo
-        uses: actions/checkout@main
-      - name: build application
-        run: make build
       - run: make lint
       - run: make test
