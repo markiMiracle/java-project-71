@@ -1,5 +1,6 @@
 name: Java CI
 
+
 on:
   - push
   - pull_request
@@ -14,12 +15,10 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-      - name: Setup Gradle
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v3
         with:
-           gradle-version: 8.5
-    
-      - name: Check gradle version
-        run: gradle --version
+          gradle-version: 8.7
+      - run: gradle --version
+      - run: ./gradlew checkstyleMain
       - run: ./gradlew test
       - run: ./gradlew checkstyleMain
