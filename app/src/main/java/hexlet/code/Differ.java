@@ -1,7 +1,9 @@
 package hexlet.code;
 
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Map;
+import java.util.TreeMap;
+
 
 import static hexlet.code.Parser.parse;
 
