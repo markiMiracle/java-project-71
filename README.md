@@ -9,3 +9,5 @@
 
 [GetDiff(format=stylish)](https://asciinema.org/a/DouPELEDveSNXuxf80Tq3TXP1)
 
+[GetDiff(format=plain)](https://asciinema.org/a/jgGNAppHIlEfPayclT0weF3fi)
+
