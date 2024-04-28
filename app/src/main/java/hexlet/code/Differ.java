@@ -4,41 +4,74 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.TreeMap;
 
-
+import static hexlet.code.Format.stylish;
 import static hexlet.code.Parser.parse;
 
 
 public class Differ {
-    public static void generate(Path filePath1, Path filePath2) throws Exception {
-        System.out.println(getDiff(filePath1, filePath2));
+    public static String generate(Path filePath1, Path filePath2, String format) throws Exception {
+        if (format.equals("stylish")) {
+            var resultDiff = getDiff(filePath1, filePath2);
+            System.out.println(stylish(resultDiff));
+            return stylish(resultDiff);
+        } else {
+            System.out.println("pica pica");
+            return "pica pica";
+        }
     }
-    public static String getDiff(Path filePath1, Path filePath2) throws Exception {
+    public static Map<String, KeyStatus> getDiff(Path filePath1, Path filePath2) throws Exception {
         var mappedContent1 = parse(filePath1);
         var mappedContent2 = parse(filePath2);
-        return getResult(mappedContent1, mappedContent2);
-    }
-
-    public static String getResult(Map<String, Object> map1, Map<String, Object> map2) {
-        StringBuilder result = new StringBuilder("{\n");
-        var sortedMap = new TreeMap<>(map1);
-        sortedMap.putAll(map2);
+        var sortedMap = new TreeMap<>(mappedContent1);
+        sortedMap.putAll(mappedContent2);
+        var resultDiff = new TreeMap<String, KeyStatus>();
         for (var element: sortedMap.entrySet()) {
             var key = element.getKey();
-            var value = "" + element.getValue();
-            if (map1.containsKey(key) && map2.containsKey(key)) {
-                if ((map1.get(key) + "").equals(value)) {
-                    result.append("    " + key + ": " + value + "\n");
+            var currentValue = element.getValue();
+            if (mappedContent1.containsKey(key) && mappedContent2.containsKey(key)) {
+                if (mappedContent1.get(key) == null && currentValue != null) {
+                    var keyStatus = new KeyStatus.KeyStatusBuilder()
+                            .statusOfKey("changed")
+                            .pastValue(null)
+                            .currentValue(currentValue)
+                            .build();
+                    resultDiff.put(key, keyStatus);
+                } else if (mappedContent1.get(key) != null && currentValue == null) {
+                    var keyStatus = new KeyStatus.KeyStatusBuilder()
+                            .statusOfKey("changed")
+                            .pastValue(mappedContent1.get(key))
+                            .currentValue(null)
+                            .build();
+                    resultDiff.put(key, keyStatus);
+                } else if (mappedContent1.get(key).equals(currentValue)) {
+                    var keyStatus = new KeyStatus.KeyStatusBuilder()
+                            .statusOfKey("unchanged")
+                            .pastValue(currentValue)
+                            .currentValue(currentValue)
+                            .build();
+                    resultDiff.put(key, keyStatus);
                 } else {
-                    result.append("  - " + key + ": " + map1.get(key) + "\n");
-                    result.append("  + " + key + ": " + value + "\n");
+                    var keyStatus = new KeyStatus.KeyStatusBuilder()
+                            .statusOfKey("changed")
+                            .pastValue(mappedContent1.get(key))
+                            .currentValue(currentValue)
+                            .build();
+                    resultDiff.put(key, keyStatus);
                 }
-            } else if (map2.containsKey(key)) {
-                result.append("  + " + key + ": " + value + "\n");
+            } else if (mappedContent2.containsKey(key)) {
+                var keyStatus = new KeyStatus.KeyStatusBuilder()
+                        .statusOfKey("added")
+                        .currentValue(currentValue)
+                        .build();
+                resultDiff.put(key, keyStatus);
             } else {
-                result.append("  - " + key + ": " + value + "\n");
+                var keyStatus = new KeyStatus.KeyStatusBuilder()
+                        .statusOfKey("deleted")
+                        .pastValue(mappedContent1.get(key))
+                        .build();
+                resultDiff.put(key, keyStatus);
             }
         }
-        result.append("}");
-        return String.valueOf(result);
+        return resultDiff;
     }
 }

@@ -3,6 +3,7 @@ import org.gradle.internal.impldep.org.eclipse.jgit.lib.ObjectChecker.type
 plugins {
     id("java")
     id("application")
+    id("io.freefair.lombok") version "8.4"
     checkstyle
     jacoco
 }
@@ -28,7 +29,9 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
     implementation("org.assertj:assertj-core:3.25.1")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.0")
+    compileOnly("org.projectlombok:lombok:1.18.30")
 }
+
 
 tasks.test {
     useJUnitPlatform()

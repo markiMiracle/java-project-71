@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.TreeMap;
+
+import static hexlet.code.Differ.generate;
 import static hexlet.code.Differ.getDiff;
 import static hexlet.code.Parser.parse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,38 +22,38 @@ public class DifferTests {
     }
 
     @Test
-    void diffTestJson() throws Exception {
+    void stylishTestJson() throws Exception {
         Path path1 = Paths.get("src/test/resources/differTest/file1.json");
         Path path2 = Paths.get("src/test/resources/differTest/file2.json");
         Path path3 = Paths.get("src/test/resources/differTest/file3.json");
         Path path4 = Paths.get("src/test/resources/differTest/file4.json");
-        var actual1 = getDiff(path1, path2);
-        var actual2 = getDiff(path3, path4);
+        var actual1 = generate(path1, path2, "stylish");
+        var actual2 = generate(path3, path4, "stylish");
         var expect1 = "{\n"
-                + "    chars1: [a, b, c]\n"
-                + "  - chars2: [d, e, f]\n"
-                + "  + chars2: false\n"
-                + "  - checked: false\n"
-                + "  + checked: true\n"
-                + "  - default: null\n"
-                + "  + default: [value1, value2]\n"
-                + "  - id: 45\n"
-                + "  + id: null\n"
-                + "  - key1: value1\n"
-                + "  + key2: value2\n"
-                + "    numbers1: [1, 2, 3, 4]\n"
-                + "  - numbers2: [2, 3, 4, 5]\n"
-                + "  + numbers2: [22, 33, 44, 55]\n"
-                + "  - numbers3: [3, 4, 5]\n"
-                + "  + numbers4: [4, 5, 6]\n"
-                + "  + obj1: {nestedKey=value, isNested=true}\n"
-                + "  - setting1: Some value\n"
-                + "  + setting1: Another value\n"
-                + "  - setting2: 200\n"
-                + "  + setting2: 300\n"
-                + "  - setting3: true\n"
-                + "  + setting3: none\n"
-                + "}";
+               + "    chars1: [a, b, c]\n"
+               + "  - chars2: [d, e, f]\n"
+               + "  + chars2: false\n"
+               + "  - checked: false\n"
+               + "  + checked: true\n"
+               + "  - default: null\n"
+               + "  + default: [value1, value2]\n"
+               + "  - id: 45\n"
+               + "  + id: null\n"
+               + "  - key1: value1\n"
+               + "  + key2: value2\n"
+               + "    numbers1: [1, 2, 3, 4]\n"
+               + "  - numbers2: [2, 3, 4, 5]\n"
+               + "  + numbers2: [22, 33, 44, 55]\n"
+               + "  - numbers3: [3, 4, 5]\n"
+               + "  + numbers4: [4, 5, 6]\n"
+               + "  + obj1: {nestedKey=value, isNested=true}\n"
+               + "  - setting1: Some value\n"
+               + "  + setting1: Another value\n"
+               + "  - setting2: 200\n"
+               + "  + setting2: 300\n"
+               + "  - setting3: true\n"
+               + "  + setting3: none\n"
+               + "}";
         var expect2 = "{\n"
                 + "    follow: false\n"
                 + "    host: hexlet.io\n"
@@ -63,13 +66,13 @@ public class DifferTests {
     }
 
     @Test
-    void differTestYaml() throws Exception {
+    void stylishTestYaml() throws Exception {
         Path path1 = Paths.get("src/test/resources/differTest/file1.yml");
         Path path2 = Paths.get("src/test/resources/differTest/file2.yml");
         Path path3 = Paths.get("src/test/resources/differTest/file3.yml");
         Path path4 = Paths.get("src/test/resources/differTest/file4.yml");
-        var actual1 = getDiff(path1, path2);
-        var actual2 = getDiff(path3, path4);
+        var actual1 = generate(path1, path2, "stylish");
+        var actual2 = generate(path3, path4, "stylish");
         var expect1 = "{\n"
                 + "  - follow: false\n"
                 + "    host: hexlet.io\n"
@@ -87,6 +90,40 @@ public class DifferTests {
 
         assertEquals(expect1, actual1);
         assertEquals(expect2, actual2);
+    }
+
+    @Test
+    void diffTest() throws Exception {
+        Path path1 = Paths.get("src/test/resources/differTest/file1.yml");
+        Path path2 = Paths.get("src/test/resources/differTest/file2.yml");
+        var actual = getDiff(path1, path2);
+        var expected = new TreeMap<>();
+        expected.put("follow", new KeyStatus.KeyStatusBuilder()
+                .statusOfKey("deleted")
+                .currentValue(null)
+                .pastValue(false)
+                .build());
+        expected.put("host", new KeyStatus.KeyStatusBuilder()
+                .statusOfKey("unchanged")
+                .currentValue("hexlet.io")
+                .pastValue("hexlet.io")
+                .build());
+        expected.put("proxy", new KeyStatus.KeyStatusBuilder()
+                .statusOfKey("deleted")
+                .currentValue(null)
+                .pastValue("123.234.53.22")
+                .build());
+        expected.put("timeout", new KeyStatus.KeyStatusBuilder()
+                .statusOfKey("changed")
+                .currentValue(20)
+                .pastValue(50)
+                .build());
+        expected.put("verbose", new KeyStatus.KeyStatusBuilder()
+                .statusOfKey("added")
+                .currentValue(true)
+                .pastValue(null)
+                .build());
+        assertEquals(expected, actual);
     }
 
 }
