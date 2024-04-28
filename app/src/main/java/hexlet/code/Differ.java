@@ -19,7 +19,7 @@ public class Differ {
             System.out.println(plain(resultDiff));
             return plain(resultDiff);
         } else {
-            throw new RuntimeException("No valid argument. Use stylish or plain.");
+            throw new RuntimeException("No valid argument. Use 'stylish' or 'plain'.");
         }
     }
     public static Map<String, KeyStatus> getDiff(Path filePath1, Path filePath2) throws Exception {
