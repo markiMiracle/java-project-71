@@ -4,23 +4,15 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static hexlet.code.Format.plain;
-import static hexlet.code.Format.stylish;
+import static hexlet.code.Formatter.getFormat;
 import static hexlet.code.Parser.parse;
 
 
+
 public class Differ {
-    public static String generate(Path filePath1, Path filePath2, String format) throws Exception {
+    public static void generate(Path filePath1, Path filePath2, String format) throws Exception {
         var resultDiff = getDiff(filePath1, filePath2);
-        if (format.equals("stylish")) {
-            System.out.println(stylish(resultDiff));
-            return stylish(resultDiff);
-        } else if (format.equals("plain")) {
-            System.out.println(plain(resultDiff));
-            return plain(resultDiff);
-        } else {
-            throw new RuntimeException("No valid argument. Use 'stylish' or 'plain'.");
-        }
+        System.out.println(getFormat(resultDiff));
     }
     public static Map<String, KeyStatus> getDiff(Path filePath1, Path filePath2) throws Exception {
         var mappedContent1 = parse(filePath1);

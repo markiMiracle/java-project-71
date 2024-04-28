@@ -6,8 +6,9 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static hexlet.code.Differ.generate;
+import static hexlet.code.App.format;
 import static hexlet.code.Differ.getDiff;
+import static hexlet.code.Formatter.getFormat;
 import static hexlet.code.Parser.parse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,8 +28,9 @@ public class DifferTests {
         Path path2 = Paths.get("src/test/resources/differTest/file2.json");
         Path path3 = Paths.get("src/test/resources/differTest/file3.json");
         Path path4 = Paths.get("src/test/resources/differTest/file4.json");
-        var actual1 = generate(path1, path2, "stylish");
-        var actual2 = generate(path3, path4, "stylish");
+        format = "stylish";
+        var actual1 = getFormat(getDiff(path1, path2));
+        var actual2 = getFormat(getDiff(path3, path4));
         var expect1 = "{\n"
                + "    chars1: [a, b, c]\n"
                + "  - chars2: [d, e, f]\n"
@@ -71,8 +73,9 @@ public class DifferTests {
         Path path2 = Paths.get("src/test/resources/differTest/file2.yml");
         Path path3 = Paths.get("src/test/resources/differTest/file3.yml");
         Path path4 = Paths.get("src/test/resources/differTest/file4.yml");
-        var actual1 = generate(path1, path2, "stylish");
-        var actual2 = generate(path3, path4, "stylish");
+        format = "stylish";
+        var actual1 = getFormat(getDiff(path1, path2));
+        var actual2 = getFormat(getDiff(path3, path4));
         var expect1 = "{\n"
                 + "  - follow: false\n"
                 + "    host: hexlet.io\n"
@@ -96,7 +99,8 @@ public class DifferTests {
     void plainTest() throws Exception {
         Path path1 = Paths.get("src/test/resources/differTest/file1.json");
         Path path2 = Paths.get("src/test/resources/differTest/file2.json");
-        var actual1 = generate(path1, path2, "plain");
+        format = "plain";
+        var actual1 = getFormat(getDiff(path1, path2));
         String expected1 = "Property 'chars2' was updated. From [complex value] to false\n"
                + "Property 'checked' was updated. From false to true\n"
                + "Property 'default' was updated. From null to [complex value]\n"
@@ -146,5 +150,4 @@ public class DifferTests {
                 .build());
         assertEquals(expected, actual);
     }
-
 }
