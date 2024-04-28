@@ -6,4 +6,5 @@
 
 ### Asciinemas:
 [GetDiff(yml)](https://asciinema.org/a/jWwxR8u1VLmqutPIOgxq7WZsy)
+[GetDiff(format=stylish)](https://asciinema.org/a/DouPELEDveSNXuxf80Tq3TXP1)
 
