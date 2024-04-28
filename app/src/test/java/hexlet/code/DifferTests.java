@@ -93,13 +93,34 @@ public class DifferTests {
     }
 
     @Test
+    void plainTest() throws Exception {
+        Path path1 = Paths.get("src/test/resources/differTest/file1.json");
+        Path path2 = Paths.get("src/test/resources/differTest/file2.json");
+        var actual1 = generate(path1, path2, "plain");
+        String expected1 = "Property 'chars2' was updated. From [complex value] to false\n"
+               + "Property 'checked' was updated. From false to true\n"
+               + "Property 'default' was updated. From null to [complex value]\n"
+               + "Property 'id' was updated. From 45 to null\n"
+               + "Property 'key1' was removed\n"
+               + "Property 'key2' was added with value: 'value2'\n"
+               + "Property 'numbers2' was updated. From [complex value] to [complex value]\n"
+               + "Property 'numbers3' was removed\n"
+               + "Property 'numbers4' was added with value: [complex value]\n"
+               + "Property 'obj1' was added with value: [complex value]\n"
+               + "Property 'setting1' was updated. From 'Some value' to 'Another value'\n"
+               + "Property 'setting2' was updated. From 200 to 300\n"
+               + "Property 'setting3' was updated. From true to 'none'";
+        assertEquals(expected1, actual1);
+    }
+
+    @Test
     void diffTest() throws Exception {
         Path path1 = Paths.get("src/test/resources/differTest/file1.yml");
         Path path2 = Paths.get("src/test/resources/differTest/file2.yml");
         var actual = getDiff(path1, path2);
         var expected = new TreeMap<>();
         expected.put("follow", new KeyStatus.KeyStatusBuilder()
-                .statusOfKey("deleted")
+                .statusOfKey("removed")
                 .currentValue(null)
                 .pastValue(false)
                 .build());
@@ -109,12 +130,12 @@ public class DifferTests {
                 .pastValue("hexlet.io")
                 .build());
         expected.put("proxy", new KeyStatus.KeyStatusBuilder()
-                .statusOfKey("deleted")
+                .statusOfKey("removed")
                 .currentValue(null)
                 .pastValue("123.234.53.22")
                 .build());
         expected.put("timeout", new KeyStatus.KeyStatusBuilder()
-                .statusOfKey("changed")
+                .statusOfKey("updated")
                 .currentValue(20)
                 .pastValue(50)
                 .build());

@@ -4,19 +4,22 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static hexlet.code.Format.plain;
 import static hexlet.code.Format.stylish;
 import static hexlet.code.Parser.parse;
 
 
 public class Differ {
     public static String generate(Path filePath1, Path filePath2, String format) throws Exception {
+        var resultDiff = getDiff(filePath1, filePath2);
         if (format.equals("stylish")) {
-            var resultDiff = getDiff(filePath1, filePath2);
             System.out.println(stylish(resultDiff));
             return stylish(resultDiff);
+        } else if (format.equals("plain")) {
+            System.out.println(plain(resultDiff));
+            return plain(resultDiff);
         } else {
-            System.out.println("pica pica");
-            return "pica pica";
+            throw new RuntimeException("No valid argument. Use stylish or plain.");
         }
     }
     public static Map<String, KeyStatus> getDiff(Path filePath1, Path filePath2) throws Exception {
@@ -31,14 +34,14 @@ public class Differ {
             if (mappedContent1.containsKey(key) && mappedContent2.containsKey(key)) {
                 if (mappedContent1.get(key) == null && currentValue != null) {
                     var keyStatus = new KeyStatus.KeyStatusBuilder()
-                            .statusOfKey("changed")
+                            .statusOfKey("updated")
                             .pastValue(null)
                             .currentValue(currentValue)
                             .build();
                     resultDiff.put(key, keyStatus);
                 } else if (mappedContent1.get(key) != null && currentValue == null) {
                     var keyStatus = new KeyStatus.KeyStatusBuilder()
-                            .statusOfKey("changed")
+                            .statusOfKey("updated")
                             .pastValue(mappedContent1.get(key))
                             .currentValue(null)
                             .build();
@@ -52,7 +55,7 @@ public class Differ {
                     resultDiff.put(key, keyStatus);
                 } else {
                     var keyStatus = new KeyStatus.KeyStatusBuilder()
-                            .statusOfKey("changed")
+                            .statusOfKey("updated")
                             .pastValue(mappedContent1.get(key))
                             .currentValue(currentValue)
                             .build();
@@ -66,7 +69,7 @@ public class Differ {
                 resultDiff.put(key, keyStatus);
             } else {
                 var keyStatus = new KeyStatus.KeyStatusBuilder()
-                        .statusOfKey("deleted")
+                        .statusOfKey("removed")
                         .pastValue(mappedContent1.get(key))
                         .build();
                 resultDiff.put(key, keyStatus);
