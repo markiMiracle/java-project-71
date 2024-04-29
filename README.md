@@ -11,3 +11,5 @@
 
 [GetDiff(format=plain)](https://asciinema.org/a/jgGNAppHIlEfPayclT0weF3fi)
 
+[GetDiff(format=json)](https://asciinema.org/a/IE0zE3NwS3EKrJ4N54R7c8VXB)
+
