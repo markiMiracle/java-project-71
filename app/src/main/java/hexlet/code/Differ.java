@@ -26,6 +26,7 @@ public class Differ {
             if (mappedContent1.containsKey(key) && mappedContent2.containsKey(key)) {
                 if (mappedContent1.get(key) == null && currentValue != null) {
                     var keyStatus = new KeyStatus.KeyStatusBuilder()
+                            .keyName(key)
                             .statusOfKey("updated")
                             .pastValue(null)
                             .currentValue(currentValue)
@@ -33,6 +34,7 @@ public class Differ {
                     resultDiff.put(key, keyStatus);
                 } else if (mappedContent1.get(key) != null && currentValue == null) {
                     var keyStatus = new KeyStatus.KeyStatusBuilder()
+                            .keyName(key)
                             .statusOfKey("updated")
                             .pastValue(mappedContent1.get(key))
                             .currentValue(null)
@@ -40,6 +42,7 @@ public class Differ {
                     resultDiff.put(key, keyStatus);
                 } else if (mappedContent1.get(key).equals(currentValue)) {
                     var keyStatus = new KeyStatus.KeyStatusBuilder()
+                            .keyName(key)
                             .statusOfKey("unchanged")
                             .pastValue(currentValue)
                             .currentValue(currentValue)
@@ -47,6 +50,7 @@ public class Differ {
                     resultDiff.put(key, keyStatus);
                 } else {
                     var keyStatus = new KeyStatus.KeyStatusBuilder()
+                            .keyName(key)
                             .statusOfKey("updated")
                             .pastValue(mappedContent1.get(key))
                             .currentValue(currentValue)
@@ -55,12 +59,14 @@ public class Differ {
                 }
             } else if (mappedContent2.containsKey(key)) {
                 var keyStatus = new KeyStatus.KeyStatusBuilder()
+                        .keyName(key)
                         .statusOfKey("added")
                         .currentValue(currentValue)
                         .build();
                 resultDiff.put(key, keyStatus);
             } else {
                 var keyStatus = new KeyStatus.KeyStatusBuilder()
+                        .keyName(key)
                         .statusOfKey("removed")
                         .pastValue(mappedContent1.get(key))
                         .build();

@@ -124,30 +124,52 @@ public class DifferTests {
         var actual = getDiff(path1, path2);
         var expected = new TreeMap<>();
         expected.put("follow", new KeyStatus.KeyStatusBuilder()
+                        .keyName("follow")
                 .statusOfKey("removed")
                 .currentValue(null)
                 .pastValue(false)
                 .build());
         expected.put("host", new KeyStatus.KeyStatusBuilder()
+                        .keyName("host")
                 .statusOfKey("unchanged")
                 .currentValue("hexlet.io")
                 .pastValue("hexlet.io")
                 .build());
         expected.put("proxy", new KeyStatus.KeyStatusBuilder()
+                        .keyName("proxy")
                 .statusOfKey("removed")
                 .currentValue(null)
                 .pastValue("123.234.53.22")
                 .build());
         expected.put("timeout", new KeyStatus.KeyStatusBuilder()
+                        .keyName("timeout")
                 .statusOfKey("updated")
                 .currentValue(20)
                 .pastValue(50)
                 .build());
         expected.put("verbose", new KeyStatus.KeyStatusBuilder()
+                        .keyName("verbose")
                 .statusOfKey("added")
                 .currentValue(true)
                 .pastValue(null)
                 .build());
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void jsonTest() throws Exception {
+        Path path1 = Paths.get("src/test/resources/differTest/file1.yml");
+        Path path2 = Paths.get("src/test/resources/differTest/file2.yml");
+        format = "json";
+        var actual1 = getFormat(getDiff(path1, path2));
+        var expect1 = "[{\"keyName\":\"follow\",\"statusOfKey\":\"removed\","
+               + "\"pastValue\":false,\"currentValue\":null},{\"keyName\":\"host\","
+               + "\"statusOfKey\":\"unchanged\",\"pastValue\":\"hexlet.io\","
+               + "\"currentValue\":\"hexlet.io\"},{\"keyName\":\"proxy\","
+               + "\"statusOfKey\":\"removed\",\"pastValue\":\"123.234.53.22\","
+               + "\"currentValue\":null},{\"keyName\":\"timeout\",\"statusOfKey\":\"updated\","
+               + "\"pastValue\":50,\"currentValue\":20},{\"keyName\":\"verbose\",\"statusOfKey\":\"added\","
+               + "\"pastValue\":null,\"currentValue\":true}]";
+        assertEquals(expect1, actual1);
     }
 }

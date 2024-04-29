@@ -19,6 +19,7 @@ import java.util.LinkedHashMap;
 @NoArgsConstructor
 @Builder
 public class KeyStatus {
+    private String keyName;
     private String statusOfKey;
     private Object pastValue;
     private Object currentValue;
