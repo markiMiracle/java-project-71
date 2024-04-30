@@ -9,9 +9,9 @@ import java.util.concurrent.Callable;
 class App implements Callable<Integer> {
 
     @CommandLine.Parameters(index = "0", paramLabel = "filepath1", description = "path to first file")
-    public String filePath1;
+    private String filePath1;
     @CommandLine.Parameters(index = "1", paramLabel = "filepath2", description = "path to second file")
-    public String filePath2;
+    private String filePath2;
 
     @Override
     public Integer call() throws Exception {
@@ -20,7 +20,7 @@ class App implements Callable<Integer> {
     }
     @CommandLine.Option(names = {"-f", "--format"}, paramLabel = "format",
             description = "output format [default: stylish]")
-    public String format = "stylish";
+    private String format = "stylish";
 
     public static void main(String... args) {
         int exitCode = new CommandLine(new App()).execute(args);

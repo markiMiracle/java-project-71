@@ -24,7 +24,7 @@ public class KeyStatus {
     private Object pastValue;
     private Object currentValue;
 
-    public String isComplexValue(Object value) {
+    public static String isComplexValue(Object value) {
         if (value == null) {
             return "null";
         }
