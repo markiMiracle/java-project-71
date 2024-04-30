@@ -1,7 +1,6 @@
 import org.gradle.internal.impldep.org.eclipse.jgit.lib.ObjectChecker.type
 
 plugins {
-    id("java")
     id("application")
     id("io.freefair.lombok") version "8.4"
     checkstyle
