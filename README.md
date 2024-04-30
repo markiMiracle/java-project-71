@@ -17,11 +17,11 @@
     - **json** (return diff in json format)
     
 ### Asciinemas:
-[GetDiff(yml)](https://asciinema.org/a/jWwxR8u1VLmqutPIOgxq7WZsy)
+- [GetDiff(yml)](https://asciinema.org/a/jWwxR8u1VLmqutPIOgxq7WZsy)
 
-[GetDiff(format=stylish)](https://asciinema.org/a/DouPELEDveSNXuxf80Tq3TXP1)
+- [GetDiff(format=stylish)](https://asciinema.org/a/DouPELEDveSNXuxf80Tq3TXP1)
 
-[GetDiff(format=plain)](https://asciinema.org/a/jgGNAppHIlEfPayclT0weF3fi)
+- [GetDiff(format=plain)](https://asciinema.org/a/jgGNAppHIlEfPayclT0weF3fi)
 
-[GetDiff(format=json)](https://asciinema.org/a/IE0zE3NwS3EKrJ4N54R7c8VXB)
+- [GetDiff(format=json)](https://asciinema.org/a/IE0zE3NwS3EKrJ4N54R7c8VXB)
 
