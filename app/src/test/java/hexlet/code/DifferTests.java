@@ -17,7 +17,8 @@ public class DifferTests {
     void parseTest() throws Exception {
         Path path = Paths.get("src/test/resources/differTest/file3.json");
         var actualMap1 = parse(path);
-        var expectMap1 = Map.of("host", "hexlet.io", "timeout", 50, "proxy", "123.234.53.22", "follow", false);
+        final int value2 = 50;
+        var expectMap1 = Map.of("host", "hexlet.io", "timeout", value2, "proxy", "123.234.53.22", "follow", false);
         assertEquals(actualMap1, expectMap1);
     }
 
@@ -120,6 +121,8 @@ public class DifferTests {
         String path2 = "src/test/resources/differTest/file2.yml";
         var actual = getDiff(path1, path2);
         var expected = new TreeMap<>();
+        final int currentValue = 20;
+        final int pastValue = 50;
         expected.put("follow", new KeyStatus.KeyStatusBuilder()
                         .keyName("follow")
                 .statusOfKey("removed")
@@ -141,8 +144,8 @@ public class DifferTests {
         expected.put("timeout", new KeyStatus.KeyStatusBuilder()
                         .keyName("timeout")
                 .statusOfKey("updated")
-                .currentValue(20)
-                .pastValue(50)
+                .currentValue(currentValue)
+                .pastValue(pastValue)
                 .build());
         expected.put("verbose", new KeyStatus.KeyStatusBuilder()
                         .keyName("verbose")
