@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static hexlet.code.App.format;
 import static hexlet.code.Differ.getDiff;
 import static hexlet.code.Formatter.getFormat;
 import static hexlet.code.Parser.parse;
@@ -28,9 +27,8 @@ public class DifferTests {
         String path2 = "src/test/resources/differTest/file2.json";
         String path3 = "src/test/resources/differTest/file3.json";
         String path4 = "src/test/resources/differTest/file4.json";
-        format = "stylish";
-        var actual1 = getFormat(getDiff(path1, path2));
-        var actual2 = getFormat(getDiff(path3, path4));
+        var actual1 = getFormat(getDiff(path1, path2), "stylish");
+        var actual2 = getFormat(getDiff(path3, path4), "stylish");
         var expect1 = "{\n"
                + "    chars1: [a, b, c]\n"
                + "  - chars2: [d, e, f]\n"
@@ -73,9 +71,8 @@ public class DifferTests {
         String path2 = "src/test/resources/differTest/file2.yml";
         String path3 = "src/test/resources/differTest/file3.yml";
         String path4 = "src/test/resources/differTest/file4.yml";
-        format = "stylish";
-        var actual1 = getFormat(getDiff(path1, path2));
-        var actual2 = getFormat(getDiff(path3, path4));
+        var actual1 = getFormat(getDiff(path1, path2), "stylish");
+        var actual2 = getFormat(getDiff(path3, path4),  "stylish");
         var expect1 = "{\n"
                 + "  - follow: false\n"
                 + "    host: hexlet.io\n"
@@ -99,8 +96,8 @@ public class DifferTests {
     void plainTest() throws Exception {
         String path1 = "src/test/resources/differTest/file1.json";
         String path2 = "src/test/resources/differTest/file2.json";
-        format = "plain";
-        var actual1 = getFormat(getDiff(path1, path2));
+        var actual1 = Differ.generate("src/test/resources/differTest/file1.json",
+                "src/test/resources/differTest/file2.json", "plain");
         String expected1 = "Property 'chars2' was updated. From [complex value] to false\n"
                + "Property 'checked' was updated. From false to true\n"
                + "Property 'default' was updated. From null to [complex value]\n"
@@ -160,8 +157,7 @@ public class DifferTests {
     void jsonTest() throws Exception {
         String path1 = "src/test/resources/differTest/file1.yml";
         String path2 = "src/test/resources/differTest/file2.yml";
-        format = "json";
-        var actual1 = getFormat(getDiff(path1, path2));
+        var actual1 = getFormat(getDiff(path1, path2), "json");
         var expect1 = "[{\"keyName\":\"follow\",\"statusOfKey\":\"removed\","
                + "\"pastValue\":false,\"currentValue\":null},{\"keyName\":\"host\","
                + "\"statusOfKey\":\"unchanged\",\"pastValue\":\"hexlet.io\","

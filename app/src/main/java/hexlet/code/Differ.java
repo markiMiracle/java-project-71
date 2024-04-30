@@ -15,7 +15,7 @@ public class Differ {
     }
     public static String generate(String filePath1, String filePath2, String format) throws Exception {
         var resultDiff = getDiff(filePath1, filePath2);
-        return getFormat(resultDiff);
+        return getFormat(resultDiff, format);
     }
     public static Map<String, KeyStatus> getDiff(String filePath1, String filePath2) throws Exception {
         Path path1 = Path.of(filePath1);
