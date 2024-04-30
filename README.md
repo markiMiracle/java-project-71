@@ -15,6 +15,34 @@
     - **stylish** (a simple format that clearly shows the difference using '+', '-' and ' ')
     - **plain** (returns the diff in text format (use this format if you need to compare the files that can contain a complex value) )
     - **json** (returns the diff in json format)
+
+
+
+
+## Setup
+
+```bash
+make build
+```
+
+## Run
+
+```bash
+make run
+```
+
+## Run checkstyle
+
+```bash
+make lint
+```
+
+## Run tests
+
+```bash
+make test
+```
+
     
 ### Asciinemas:
 - [GetDiff(yml)](https://asciinema.org/a/jWwxR8u1VLmqutPIOgxq7WZsy)
