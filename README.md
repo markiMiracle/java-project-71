@@ -11,9 +11,9 @@
     
 #### Output formats:
     Also, you can get the value in three different formats:
-    ##### -stylish(a simple format that clearly shows the difference using '+', '-' and ' ')
-    ##### -plain(use this format if you need to compare to files that can contain a complex value)
-    ##### -json(return diff in json format)
+    - stylish(a simple format that clearly shows the difference using '+', '-' and ' ')
+    - plain(use this format if you need to compare to files that can contain a complex value)
+    - json(return diff in json format)
     
 ### Asciinemas:
 [GetDiff(yml)](https://asciinema.org/a/jWwxR8u1VLmqutPIOgxq7WZsy)
