@@ -12,7 +12,7 @@
 
     
 - ### ***Output formats***
-run with -f to choose the format [default: *stylish*]
+    run with -f to choose the format [default: *stylish*]
     - **stylish** (a simple format that clearly shows the difference using '+', '-' and ' ')
     - **plain** (returns the diff in text format (use this format if you need to compare the files that can contain a complex value) )
     - **json** (returns the diff in json format)
