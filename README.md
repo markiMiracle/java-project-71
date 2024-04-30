@@ -5,13 +5,13 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/fb08ff0fe34105eb7e2b/maintainability)](https://codeclimate.com/github/markiMiracle/java-project-71/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/fb08ff0fe34105eb7e2b/test_coverage)](https://codeclimate.com/github/markiMiracle/java-project-71/test_coverage)
 
-- ### About it:
+- ### ***About it:***
     This app will show you a difference between two files.
     You can use two formats : json/yml
 
 
     
-- ### Output formats #### (run with -f to choose the format [default: *stylish*]):
+- ### ***Output formats*** (run with -f to choose the format [default: *stylish*]):
     - **stylish** (a simple format that clearly shows the difference using '+', '-' and ' ')
     - **plain** (returns the diff in text format (use this format if you need to compare the files that can contain a complex value) )
     - **json** (returns the diff in json format)
