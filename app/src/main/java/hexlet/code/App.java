@@ -2,7 +2,6 @@ package hexlet.code;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
-import java.nio.file.Path;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
@@ -10,13 +9,13 @@ import java.util.concurrent.Callable;
 class App implements Callable<Integer> {
 
     @CommandLine.Parameters(index = "0", paramLabel = "filepath1", description = "path to first file")
-    public Path filePath1;
+    public String filePath1;
     @CommandLine.Parameters(index = "1", paramLabel = "filepath2", description = "path to second file")
-    public Path filePath2;
+    public String filePath2;
 
     @Override
     public Integer call() throws Exception {
-        Differ.generate(filePath1, filePath2, format);
+        System.out.println(Differ.generate(filePath1, filePath2, format));
         return 0;
     }
     @CommandLine.Option(names = {"-f", "--format"}, paramLabel = "format",

@@ -10,13 +10,18 @@ import static hexlet.code.Parser.parse;
 
 
 public class Differ {
-    public static void generate(Path filePath1, Path filePath2, String format) throws Exception {
-        var resultDiff = getDiff(filePath1, filePath2);
-        System.out.println(getFormat(resultDiff));
+    public static String generate(String filePath1, String filePath2) throws Exception {
+        return generate(filePath1, filePath2, "stylish");
     }
-    public static Map<String, KeyStatus> getDiff(Path filePath1, Path filePath2) throws Exception {
-        var mappedContent1 = parse(filePath1);
-        var mappedContent2 = parse(filePath2);
+    public static String generate(String filePath1, String filePath2, String format) throws Exception {
+        var resultDiff = getDiff(filePath1, filePath2);
+        return getFormat(resultDiff);
+    }
+    public static Map<String, KeyStatus> getDiff(String filePath1, String filePath2) throws Exception {
+        Path path1 = Path.of(filePath1);
+        Path path2 = Path.of(filePath2);
+        var mappedContent1 = parse(path1);
+        var mappedContent2 = parse(path2);
         var sortedMap = new TreeMap<>(mappedContent1);
         sortedMap.putAll(mappedContent2);
         var resultDiff = new TreeMap<String, KeyStatus>();

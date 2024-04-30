@@ -24,10 +24,10 @@ public class DifferTests {
 
     @Test
     void stylishTestJson() throws Exception {
-        Path path1 = Paths.get("src/test/resources/differTest/file1.json");
-        Path path2 = Paths.get("src/test/resources/differTest/file2.json");
-        Path path3 = Paths.get("src/test/resources/differTest/file3.json");
-        Path path4 = Paths.get("src/test/resources/differTest/file4.json");
+        String path1 = "src/test/resources/differTest/file1.json";
+        String path2 = "src/test/resources/differTest/file2.json";
+        String path3 = "src/test/resources/differTest/file3.json";
+        String path4 = "src/test/resources/differTest/file4.json";
         format = "stylish";
         var actual1 = getFormat(getDiff(path1, path2));
         var actual2 = getFormat(getDiff(path3, path4));
@@ -69,10 +69,10 @@ public class DifferTests {
 
     @Test
     void stylishTestYaml() throws Exception {
-        Path path1 = Paths.get("src/test/resources/differTest/file1.yml");
-        Path path2 = Paths.get("src/test/resources/differTest/file2.yml");
-        Path path3 = Paths.get("src/test/resources/differTest/file3.yml");
-        Path path4 = Paths.get("src/test/resources/differTest/file4.yml");
+        String path1 = "src/test/resources/differTest/file1.yml";
+        String path2 = "src/test/resources/differTest/file2.yml";
+        String path3 = "src/test/resources/differTest/file3.yml";
+        String path4 = "src/test/resources/differTest/file4.yml";
         format = "stylish";
         var actual1 = getFormat(getDiff(path1, path2));
         var actual2 = getFormat(getDiff(path3, path4));
@@ -97,8 +97,8 @@ public class DifferTests {
 
     @Test
     void plainTest() throws Exception {
-        Path path1 = Paths.get("src/test/resources/differTest/file1.json");
-        Path path2 = Paths.get("src/test/resources/differTest/file2.json");
+        String path1 = "src/test/resources/differTest/file1.json";
+        String path2 = "src/test/resources/differTest/file2.json";
         format = "plain";
         var actual1 = getFormat(getDiff(path1, path2));
         String expected1 = "Property 'chars2' was updated. From [complex value] to false\n"
@@ -119,8 +119,8 @@ public class DifferTests {
 
     @Test
     void diffTest() throws Exception {
-        Path path1 = Paths.get("src/test/resources/differTest/file1.yml");
-        Path path2 = Paths.get("src/test/resources/differTest/file2.yml");
+        String path1 = "src/test/resources/differTest/file1.yml";
+        String path2 = "src/test/resources/differTest/file2.yml";
         var actual = getDiff(path1, path2);
         var expected = new TreeMap<>();
         expected.put("follow", new KeyStatus.KeyStatusBuilder()
@@ -158,8 +158,8 @@ public class DifferTests {
 
     @Test
     void jsonTest() throws Exception {
-        Path path1 = Paths.get("src/test/resources/differTest/file1.yml");
-        Path path2 = Paths.get("src/test/resources/differTest/file2.yml");
+        String path1 = "src/test/resources/differTest/file1.yml";
+        String path2 = "src/test/resources/differTest/file2.yml";
         format = "json";
         var actual1 = getFormat(getDiff(path1, path2));
         var expect1 = "[{\"keyName\":\"follow\",\"statusOfKey\":\"removed\","
