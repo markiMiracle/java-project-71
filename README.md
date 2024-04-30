@@ -13,7 +13,7 @@
     
 - ### Output formats(Also, you can get the value in three different formats):
     - **stylish** (a simple format that clearly shows the difference using '+', '-' and ' ')
-    - **plain** (returns the diff in text format(use this format if you need to compare to files that can contain a complex value))
+    - **plain** (returns the diff in text format (use this format if you need to compare the files that can contain a complex value) )
     - **json** (returns the diff in json format)
     
 ### Asciinemas:
