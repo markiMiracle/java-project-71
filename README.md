@@ -1,5 +1,5 @@
-### JAVA-PROJECT 
-## DIFFER
+### JAVA-PROJECT
+## ***DIFFER***
 [![Actions Status](https://github.com/markiMiracle/java-project-71/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/markiMiracle/java-project-71/actions)
 [![Actions Status](https://github.com/markiMiracle/java-project-71/actions/workflows/tests.yml/badge.svg)](https://github.com/markiMiracle/java-project-71/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fb08ff0fe34105eb7e2b/maintainability)](https://codeclimate.com/github/markiMiracle/java-project-71/maintainability)
@@ -16,7 +16,7 @@
     - **plain** (this format returns the diff in text format (use this if you need to compare the files that can contain a complex value) )
     - **json** (this format returns the diff in json format)
 
-#### run with -f to choose the format [default: *stylish*]
+#### run it with -f to choose the format [default: *stylish*]
 
 
 
