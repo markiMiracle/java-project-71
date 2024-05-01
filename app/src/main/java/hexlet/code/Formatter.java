@@ -15,7 +15,8 @@ public class Formatter {
             case "stylish" -> stylish(resultDiff);
             case "plain" -> plain(resultDiff);
             case "json" -> json(resultDiff);
-            default -> throw new RuntimeException("No valid argument. Use 'stylish' or 'plain'.");
+            default -> throw new RuntimeException("'" + format + "'" + " is no valid argument."
+                   + " Use 'stylish', 'plain' or 'json'.");
         };
     }
 }

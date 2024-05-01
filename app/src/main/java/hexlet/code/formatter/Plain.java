@@ -2,6 +2,9 @@ package hexlet.code.formatter;
 
 import hexlet.code.KeyStatus;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Plain {
@@ -12,8 +15,8 @@ public class Plain {
             var keyName = data.getKey();
             var values = data.getValue();
             String status = values.getStatusOfKey();
-            var pastValue = values.isComplexValue(values.getPastValue());
-            var currentValue = values.isComplexValue(values.getCurrentValue());
+            var pastValue = isComplexValue(values.getPastValue());
+            var currentValue = isComplexValue(values.getCurrentValue());
             if (status.equals("updated")) {
                 formatted.append("Property " + "'" + keyName + "'" + " was " + status + ". From " + pastValue
                         + " to " + currentValue);
@@ -34,5 +37,19 @@ public class Plain {
             --count;
         }
         return String.valueOf(formatted);
+    }
+
+    public static String isComplexValue(Object value) {
+        if (value == null) {
+            return "null";
+        }
+        if (value.getClass() == Arrays.class || value.getClass() == ArrayList.class || value.getClass() == Object.class
+                || value.getClass() == LinkedHashMap.class) {
+            return "[complex value]";
+        } else if (value.getClass() == String.class) {
+            return "'" + value + "'";
+        } else {
+            return "" + value;
+        }
     }
 }

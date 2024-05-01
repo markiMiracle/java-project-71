@@ -18,9 +18,11 @@ class App implements Callable<Integer> {
         System.out.println(Differ.generate(filePath1, filePath2, format));
         return 0;
     }
-    @CommandLine.Option(names = {"-f", "--format"}, paramLabel = "format",
-            description = "output format [default: stylish]")
-    private String format = "stylish";
+    @CommandLine.Option(names = {"-f", "--format"},
+            defaultValue = "stylish",
+            paramLabel = "format",
+            description = "output format [default: ${DEFAULT-VALUE}]")
+    private String format;
 
     public static void main(String... args) {
         int exitCode = new CommandLine(new App()).execute(args);
