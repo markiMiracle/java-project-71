@@ -17,7 +17,7 @@ import static hexlet.code.Parser.parse;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DifferTests {
+public final class DifferTests {
     private static String resultJson;
     private static String resultPlain;
     private static String resultStylish;

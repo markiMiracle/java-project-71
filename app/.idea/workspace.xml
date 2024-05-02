@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dffd76ae-9ad6-4908-a921-1ddb333780cb" name="Changes" comment="commit">
-      <change beforePath="$PROJECT_DIR$/src/main/java/hexlet/code/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hexlet/code/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hexlet/code/GetDiff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hexlet/code/GetDiff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hexlet/code/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hexlet/code/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hexlet/code/DifferTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hexlet/code/DifferTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/differTest/file1.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/fixtures/file1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/differTest/file1.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/fixtures/file1.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/differTest/file2.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/fixtures/file2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/differTest/file2.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/fixtures/file2.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/differTest/file3.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/fixtures/file3.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/differTest/file3.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/fixtures/file3.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/differTest/file4.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/fixtures/file4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/differTest/file4.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/fixtures/file4.yml" afterDir="false" />
-    </list>
+    <list default="true" id="dffd76ae-9ad6-4908-a921-1ddb333780cb" name="Changes" comment="commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,7 +99,7 @@
       <recent name="$PROJECT_DIR$/src/test" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.DifferTests.parseTest">
+  <component name="RunManager" selected="Gradle.DifferTests">
     <configuration name="DifferTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -235,8 +222,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.DifferTests.parseTest" />
         <item itemvalue="Gradle.DifferTests" />
+        <item itemvalue="Gradle.DifferTests.parseTest" />
         <item itemvalue="Gradle.DifferTests.diffTest" />
         <item itemvalue="Gradle.DifferTests.generateTest" />
         <item itemvalue="Gradle.DifferTests.jsonTest" />
