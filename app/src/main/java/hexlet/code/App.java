@@ -12,17 +12,18 @@ class App implements Callable<Integer> {
     private String filePath1;
     @CommandLine.Parameters(index = "1", paramLabel = "filepath2", description = "path to second file")
     private String filePath2;
+    @CommandLine.Option(names = {"-f", "--format"},
+            defaultValue = "stylish",
+            paramLabel = "format",
+            description = "output format [default: ${DEFAULT-VALUE}]")
+    private String format;
 
     @Override
     public Integer call() throws Exception {
         System.out.println(Differ.generate(filePath1, filePath2, format));
         return 0;
     }
-    @CommandLine.Option(names = {"-f", "--format"},
-            defaultValue = "stylish",
-            paramLabel = "format",
-            description = "output format [default: ${DEFAULT-VALUE}]")
-    private String format;
+
 
     public static void main(String... args) {
         int exitCode = new CommandLine(new App()).execute(args);

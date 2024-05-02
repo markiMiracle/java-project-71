@@ -1,7 +1,10 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,13 +12,16 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static hexlet.code.GetDiff.getDataFormat;
 import static hexlet.code.Parser.parse;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTests {
     private static String resultJson;
     private static String resultPlain;
     private static String resultStylish;
+    private static String resultParse;
 
     private static Path getFixturePath(String fileName) {
         return Paths.get("src", "test", "resources", "fixtures", fileName)
@@ -32,47 +38,24 @@ public class DifferTests {
         resultJson = readFixture("result_json.json");
         resultPlain = readFixture("result_plain.txt");
         resultStylish = readFixture("result_stylish.txt");
+        resultParse = readFixture("result_parse.json");
     }
 
-    @Test
-    void parseTest() throws Exception {
-        Path path = Paths.get("src/test/resources/differTest/file3.json");
-        var actualMap1 = parse(path);
-        final int value2 = 50;
-        var expectMap1 = Map.of("host", "hexlet.io", "timeout", value2, "proxy", "123.234.53.22", "follow", false);
-        assertEquals(actualMap1, expectMap1);
-    }
-
-    @Test
-    void stylishTest() throws Exception {
-        String path1 = "src/test/resources/differTest/file1.json";
-        String path2 = "src/test/resources/differTest/file2.json";
-        String path3 = "src/test/resources/differTest/file1.yml";
-        String path4 = "src/test/resources/differTest/file2.yml";
-        var actual1 = Differ.generate(path1, path2, "stylish");
-        var actual2 = Differ.generate(path3, path4, "stylish");
-        assertEquals(resultStylish, actual1);
-        assertEquals(resultStylish, actual2);
-    }
-
-    @Test
-    void plainTest() throws Exception {
-        String path1 = "src/test/resources/differTest/file1.json";
-        String path2 = "src/test/resources/differTest/file2.json";
-        String path3 = "src/test/resources/differTest/file1.yml";
-        String path4 = "src/test/resources/differTest/file2.yml";
-        var actual1 = Differ.generate(path1, path2, "plain");
-        var actual2 = Differ.generate(path3, path4, "plain");
-        assertEquals(resultPlain, actual1);
-        assertEquals(resultPlain, actual2);
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml"})
+    void parseTest(String format) throws Exception {
+        String path1 = getFixturePath("file3." + format).toString();
+        var actual1 =  Files.readString(Path.of(path1));
+        var mapperJson = new ObjectMapper();
+        assertThat(parse(actual1, getDataFormat(path1))).isEqualTo(mapperJson.readValue(resultParse, Map.class));
     }
 
     @Test
     void diffTest() throws Exception {
-        String path1 = "src/test/resources/differTest/file3.json";
-        String path2 = "src/test/resources/differTest/file4.json";
-        String path3 = "src/test/resources/differTest/file3.yml";
-        String path4 = "src/test/resources/differTest/file4.yml";
+        String path1 = getFixturePath("file3.json").toString();
+        String path2 = getFixturePath("file4.json").toString();
+        String path3 = getFixturePath("file3.yml").toString();
+        String path4 = getFixturePath("file4.yml").toString();
         var actual1 = GetDiff.getDiff(path1, path2);
         var actual2 = GetDiff.getDiff(path3, path4);
         var expected = new TreeMap<>();
@@ -111,28 +94,14 @@ public class DifferTests {
         assertEquals(expected, actual1);
         assertEquals(expected, actual2);
     }
-
-    @Test
-    void jsonTest() throws Exception {
-        String path1 = "src/test/resources/differTest/file1.json";
-        String path2 = "src/test/resources/differTest/file2.json";
-        String path3 = "src/test/resources/differTest/file1.yml";
-        String path4 = "src/test/resources/differTest/file2.yml";
-        var actual1 = Differ.generate(path1, path2, "json");
-        var actual2 = Differ.generate(path3, path4, "json");
-        assertEquals(resultJson, actual1);
-        assertEquals(resultJson, actual2);
-    }
-
-    @Test
-    void defaultTest() throws Exception {
-        String path1 = "src/test/resources/differTest/file1.json";
-        String path2 = "src/test/resources/differTest/file2.json";
-        String path3 = "src/test/resources/differTest/file1.yml";
-        String path4 = "src/test/resources/differTest/file2.yml";
-        var actual1 = Differ.generate(path1, path2);
-        var actual2 = Differ.generate(path3, path4);
-        assertEquals(resultStylish, actual1);
-        assertEquals(resultStylish, actual2);
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml"})
+    public void generateTest(String format) throws Exception {
+        String filePath1 = getFixturePath("file1." + format).toString();
+        String filePath2 = getFixturePath("file2." + format).toString();
+        assertThat(Differ.generate(filePath1, filePath2)).isEqualTo(resultStylish);
+        assertThat(Differ.generate(filePath1, filePath2, "plain")).isEqualTo(resultPlain);
+        assertThat(Differ.generate(filePath1, filePath2, "json")).isEqualTo(resultJson);
+        assertThat(Differ.generate(filePath1, filePath2, "stylish")).isEqualTo(resultStylish);
     }
 }

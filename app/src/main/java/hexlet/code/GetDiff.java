@@ -1,5 +1,9 @@
 package hexlet.code;
 
+import org.apache.commons.io.FilenameUtils;
+
+import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Objects;
@@ -9,10 +13,10 @@ import static hexlet.code.Parser.parse;
 
 public class GetDiff {
     public static Map<String, KeyStatus> getDiff(String filePath1, String filePath2) throws Exception {
-        Path path1 = Path.of(filePath1);
-        Path path2 = Path.of(filePath2);
-        var mappedContent1 = parse(path1);
-        var mappedContent2 = parse(path2);
+        String content1 = Files.readString(Path.of(filePath1));
+        String content2 = Files.readString(Path.of(filePath2));
+        var mappedContent1 = parse(content1, getDataFormat(filePath1));
+        var mappedContent2 = parse(content2, getDataFormat(filePath2));
         var sortedMap = new TreeMap<>(mappedContent1);
         sortedMap.putAll(mappedContent2);
         var resultDiff = new TreeMap<String, KeyStatus>();
@@ -52,5 +56,10 @@ public class GetDiff {
             }
         }
         return resultDiff;
+    }
+    public static String getDataFormat(String filepath) {
+        File file = new File(filepath);
+        String name = file.getName();
+        return FilenameUtils.getExtension(name);
     }
 }
