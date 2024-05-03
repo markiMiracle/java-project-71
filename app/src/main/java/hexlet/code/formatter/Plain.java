@@ -2,9 +2,7 @@ package hexlet.code.formatter;
 
 import hexlet.code.KeyStatus;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Plain {
@@ -43,8 +41,7 @@ public class Plain {
         if (value == null) {
             return "null";
         }
-        if (value.getClass() == Arrays.class || value.getClass() == ArrayList.class || value.getClass() == Object.class
-                || value.getClass() == LinkedHashMap.class) {
+        if (value instanceof Map || value instanceof List) {
             return "[complex value]";
         } else if (value.getClass() == String.class) {
             return "'" + value + "'";

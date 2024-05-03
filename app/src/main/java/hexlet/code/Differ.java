@@ -1,6 +1,7 @@
 package hexlet.code;
 
 
+
 import static hexlet.code.Formatter.getFormat;
 
 
@@ -11,5 +12,11 @@ public class Differ {
     public static String generate(String filePath1, String filePath2, String format) throws Exception {
         var resultDiff = GetDiff.getDiff(filePath1, filePath2);
         return getFormat(resultDiff, format);
+    }
+    public static String getDataFormat(String filePath) {
+        int index = filePath.lastIndexOf('.');
+        return index > 0
+                ? filePath.substring(index + 1)
+                : "";
     }
 }

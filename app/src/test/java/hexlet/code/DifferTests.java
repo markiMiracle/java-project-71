@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static hexlet.code.GetDiff.getDataFormat;
+import static hexlet.code.Differ.getDataFormat;
 import static hexlet.code.Parser.parse;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,14 +1,12 @@
 package hexlet.code;
 
-import org.apache.commons.io.FilenameUtils;
-
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 
+import static hexlet.code.Differ.getDataFormat;
 import static hexlet.code.Parser.parse;
 
 public class GetDiff {
@@ -56,10 +54,5 @@ public class GetDiff {
             }
         }
         return resultDiff;
-    }
-    public static String getDataFormat(String filepath) {
-        File file = new File(filepath);
-        String name = file.getName();
-        return FilenameUtils.getExtension(name);
     }
 }

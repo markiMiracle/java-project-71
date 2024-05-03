@@ -9,7 +9,7 @@ public class Parser {
         return switch (dataFormat) {
             case "yml", "yaml" -> parseYaml(content);
             case "json" -> parseJson(content);
-            default -> throw new Exception("Unknown format: '" + dataFormat + "'");
+            default -> throw new Exception("Unknown data format " + "'" + dataFormat + "'");
         };
     }
     public static Map<String, Object> parseJson(String json) throws Exception {
